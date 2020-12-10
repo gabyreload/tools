@@ -9,7 +9,7 @@ services:
       - "50000:50000"
       - "8080:8080"
     volumes: 
-      - /config/jenkins_home/:/var/jenkins_home
+      - ./config/jenkins_home/:/var/jenkins_home
       - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -23,7 +23,7 @@ services:
     depends_on: 
       - jenkins
     volumes:
-      - /config/nginx:/etc/nginx/conf.d
+      - ./config/nginx:/etc/nginx/conf.d
     ports: 
       - "80:80"
     networks:
@@ -37,7 +37,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - /config/nexus:/nexus-data
+      - ./config/nexus:/nexus-data
     networks:
       main:
         aliases:
