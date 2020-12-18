@@ -1,17 +1,17 @@
 #!/bin/bash
 
 ## clone awx repo in Github
-cd /devops
+cd /config
 git clone https://github.com/ansible/awx.git
 
 ## Backup and copy j2 Docker-Compose template ##
-mv /devops/awx/installer/roles/local_docker/templates/docker-compose.yml.j2 /devops/awx/installer/roles/local_docker/templates/docker-compose.yml.j2.bak
-cp -ruv /devops/tools/awx/docker-compose.yml.j2 /devops/awx/installer/roles/local_docker/templates/
+mv /config/awx/installer/roles/local_docker/templates/docker-compose.yml.j2 /config/awx/installer/roles/local_docker/templates/docker-compose.yml.j2.bak
+cp -ruv /config/tools/awx/docker-compose.yml.j2 /config/awx/installer/roles/local_docker/templates/
 
 ## Backup and copy inventory file ##
-mv /devops/awx/installer/inventory /devops/awx/installer/inventory_backup
-cp -ruv /devops/tools/awx/inventory /devops/awx/installer/
+mv /config/awx/installer/inventory /config/awx/installer/inventory_backup
+cp -ruv /config/tools/awx/inventory /config/awx/installer/
 
 ## Execute Ansible playbook ##
-cd /devops/awx/installer
+cd /config/awx/installer
 ansible-playbook -i inventory install.yml

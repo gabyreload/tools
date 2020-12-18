@@ -195,7 +195,7 @@ services:
     {% endif %}
   {% endif %}
   jenkins:
-    build: /devops/tools/jenkins
+    build: /config/tools/jenkins
     image: jenkins/jenkins:args
     privileged: true
     user: root
@@ -203,7 +203,7 @@ services:
       - "50000:50000"
       - "8080:8080"
     volumes:
-      - /devops/tools/jenkins/jenkins_home/:/var/jenkins_home
+      - /config/tools/jenkins/jenkins_home/:/var/jenkins_home
       - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -217,7 +217,7 @@ services:
     depends_on:
       - jenkins
     volumes:
-      - /devops/tools/nginx:/etc/nginx/conf.d
+      - /config/tools/nginx:/etc/nginx/conf.d
     ports:
       - "80:80"
     networks:
@@ -231,7 +231,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - /devops/tools/nexus:/nexus-data
+      - /config/tools/nexus:/nexus-data
     networks:
       default:
         aliases:
