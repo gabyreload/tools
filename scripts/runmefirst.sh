@@ -2,7 +2,7 @@
 
 ## clone awx repo in Github
 cd /config
-git clone https://github.com/ansible/awx.git
+git clone https://github.com/ansible/awx.git --branch 16.0.0
 
 ## Backup and copy j2 Docker-Compose template ##
 mv /config/awx/installer/roles/local_docker/templates/docker-compose.yml.j2 /config/awx/installer/roles/local_docker/templates/docker-compose.yml.j2.bak
