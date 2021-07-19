@@ -14,4 +14,4 @@ cp -ruv /config/tools/awx/inventory /config/awx/installer/
 
 ## Execute Ansible playbook ##
 cd /config/awx/installer
-/usr/local/bin/ansible-playbook -i inventory install.yml
+/usr/bin/ansible-playbook -i inventory install.yml
