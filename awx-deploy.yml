@@ -5,5 +5,5 @@ metadata:
   name: awx-deploy
 spec:
   service_type: nodeport
-  ingress_type: ingress
+  ingress_type: none
   hostname: ansible.dcisoftware.com
