@@ -5,4 +5,4 @@ metadata:
   name: awx-deploy
 spec:
   service_type: nodeport
-  ingress_type: none
+  ingress_type: ingress
