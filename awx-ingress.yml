@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "awx-deploy-ingress"
+    labels:
+        app: "awx-deploy"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: aksdevopsmgmt01-ddbff4fa.hcp.westus.azmk8s.io
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "awx-deploy"
+                servicePort: 8080
