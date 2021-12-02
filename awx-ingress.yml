@@ -7,14 +7,4 @@ spec:
   service_type: clusterip                                                                                                 
   ingress_type: ingress                                                                                                   
   hostname: my-awx.example.com
-  rules:
-  - host: my-awx.example.com
-    http:
-      paths:
-      - backend:
-          service:
-            name: awx-deploy-service
-            port:
-              number: 80
-        path: /
-        pathType: ImplementationSpecific
+  serviceName: awx-deploy-service
