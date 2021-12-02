@@ -6,7 +6,3 @@ metadata:
 spec:
   service_type: nodeport
   ingress_type: none
-  ports:
-  - protocol: TCP
-    port: 8080
-
