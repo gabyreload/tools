@@ -7,4 +7,3 @@ spec:
   service_type: clusterip                                                                                                 
   ingress_type: ingress                                                                                                   
   hostname: my-awx.example.com
-  serviceName: awx-deploy-service
