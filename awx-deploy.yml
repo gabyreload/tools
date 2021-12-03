@@ -6,7 +6,7 @@ metadata:
 spec:
   service_type: nodeport
   ingress_type: none
-  hostname: awx-mgmt.<cluster DNS>
+  hostname: awx-mgmt.4f3706b7ff3b435f91e6.westus.aksapp.io
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -18,7 +18,7 @@ metadata:
         kubernetes.io/ingress.class: addon-http-application-routing
 spec:
     rules:
-        - host: awx-mgmt.<cluster DNS>
+        - host: awx-mgmt.4f3706b7ff3b435f91e6.westus.aksapp.io
           http:
             paths:
             - path: /
