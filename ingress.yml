@@ -14,4 +14,4 @@ spec:
             - path: /
               backend:
                 serviceName: "awx-deploy-service"
-                servicePort: 8080
+                servicePort: 80
