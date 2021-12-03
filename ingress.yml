@@ -8,7 +8,7 @@ metadata:
         kubernetes.io/ingress.class: addon-http-application-routing
 spec:
     rules:
-        - host: my-awx.example.com
+        - host: awx.17a30a6b86214588b7e1.westus.aksapp.io
           http:
             paths:
             - path: /
