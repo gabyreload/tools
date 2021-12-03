@@ -6,4 +6,22 @@ metadata:
 spec:
   service_type: nodeport
   ingress_type: none
-  hostname: awx-deploy.17a30a6b86214588b7e1.westus.aksapp.io
+  hostname: awx-mgmt.<cluster DNS>
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "awx-deploy"
+    labels:
+        app: "awx-deploy-service"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: awx-mgmt.<cluster DNS>
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "awx-deploy-service"
+                servicePort: 80
