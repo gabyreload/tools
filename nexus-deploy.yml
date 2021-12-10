@@ -46,7 +46,7 @@ metadata:
     name: "nexus"
     namespace: "devops-tools"
     labels:
-        app: "nexus-server"
+        app: "nexus-service"
     annotations:
         kubernetes.io/ingress.class: addon-http-application-routing
 spec:
@@ -56,5 +56,5 @@ spec:
             paths:
             - path: /nexus
               backend:
-                serviceName: "nexus-server"
+                serviceName: "nexus-service"
                 servicePort: 8081
