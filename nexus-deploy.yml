@@ -16,7 +16,6 @@ spec:
   selector:
     matchLabels:
       app: "nexus-server"
-  hostname: nexus-mgmt.363cf27af04e4085ac6d.westus.aksapp.io
   template:
     metadata:
       labels:
