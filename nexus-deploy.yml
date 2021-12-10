@@ -39,7 +39,7 @@ spec:
       volumes:
         - name: nexus-data
           emptyDir: {}
-      hostname: nexus-mgmt.<cluster DNS>
+      hostname: nexus-mgmt.363cf27af04e4085ac6d.westus.aksapp.io
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -52,10 +52,10 @@ metadata:
         kubernetes.io/ingress.class: addon-http-application-routing
 spec:
     rules:
-        - host: nexus-mgmt.<cluster DNS>
+        - host: nexus-mgmt.363cf27af04e4085ac6d.westus.aksapp.io
           http:
             paths:
-            - path: /
+            - path: /nexus
               backend:
                 serviceName: "nexus-server"
                 servicePort: 8081
