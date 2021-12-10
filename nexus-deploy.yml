@@ -1,0 +1,61 @@
+---
+kind: namespace
+apiVersion: v1
+metadata:
+  name: devops-tools
+  labels:
+    name: devops-tools
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexus
+  namespace: devops-tools
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexus-server
+  template:
+    metadata:
+      labels:
+        app: nexus-server
+    spec:
+      containers:
+        - name: nexus
+          image: sonatype/nexus3:latest
+          resources:
+            limits:
+              memory: "4Gi"
+              cpu: "1000m"
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - name: nexus-data
+              mountPath: /nexus-data
+      volumes:
+        - name: nexus-data
+          emptyDir: {}
+      hostname: nexus-mgmt.<cluster DNS>
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "nexus"
+    namespace: devops-tools
+    labels:
+        app: "nexus-server"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: nexus-mgmt.<cluster DNS>
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "nexus-server"
+                servicePort: 8081
