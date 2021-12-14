@@ -10,7 +10,7 @@ metadata:
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: slow
+  name: azuredisk
 provisioner: kubernetes.io/azure-disk
 parameters:
   storageaccounttype: Standard_LRS
@@ -23,7 +23,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: azureDisk
+  storageClassName: azuredisk
   resources:
     requests:
       storage: 100Gi
