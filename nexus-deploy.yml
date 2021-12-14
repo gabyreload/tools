@@ -62,7 +62,7 @@ spec:
             - containerPort: 8081
           volumeMounts:
             - name: nexus-data
-              mountPath: /nexus-data
+              mountPath: /sonatype-work
       volumes:
         - name: nexus-data
           persistentVolumeClaim:
