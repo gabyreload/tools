@@ -20,6 +20,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nexus-data-claim
+  namespace: "devops-tools"
 spec:
   accessModes:
   - ReadWriteOnce
