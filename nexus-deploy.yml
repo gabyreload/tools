@@ -7,6 +7,18 @@ metadata:
   labels:
     name: "devops-tools"
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nexus-data-claim
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: AzureDisk
+  resources:
+    requests:
+      storage: 100Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
