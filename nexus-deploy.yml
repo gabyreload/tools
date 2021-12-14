@@ -14,7 +14,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: managed-standard
+  storageClassName: azureDisk
   resources:
     requests:
       storage: 100Gi
