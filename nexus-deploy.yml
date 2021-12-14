@@ -44,12 +44,11 @@ spec:
       labels:
         app: "nexus-server"
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: "nexus"
           image: sonatype/nexus3:latest
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 3000
           resources:
             limits:
               memory: "4Gi"
@@ -64,7 +63,6 @@ spec:
               mountPath: /nexus-data
       volumes:
         - name: nexus-data
-          emptyDir: {}
           persistentVolumeClaim:
             claimName: nexus-data-claim
 ---
