@@ -44,6 +44,7 @@ cd aws
 PATH=$PATH:/home/hgbarreto/.local/bin
 
 ## Install Vitals Extension
+cd $HOME
 git clone https://aur.archlinux.org/gnome-shell-extension-vitals-git.git/
 cd gnome-shell-extension-vitals-git && makepkg -si
 
