@@ -28,7 +28,9 @@ yay -Sy --needed --noconfirm \
   opensc \
   ccid \
   icaclient \
-  pcsc-tools
+  pcsc-tools \
+  gnome-icon-theme \
+  gnome-icon-theme-symbolic
 
 ## Enable on startup
 systemctl enable --now pcscd.service
@@ -40,6 +42,10 @@ unzip awscli-exe-linux-x86_64.zip
 cd aws
 ./install -i $HOME/.local/aws-cli -b $HOME/.local/bin --update
 PATH=$PATH:/home/hgbarreto/.local/bin
+
+## Install Vitals Extension
+git clone https://aur.archlinux.org/gnome-shell-extension-vitals-git.git/
+cd gnome-shell-extension-vitals-git && makepkg -si
 
 ## Restart
 shutdown -r 00
