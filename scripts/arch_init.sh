@@ -1,7 +1,7 @@
 ## Update System
 pacman -Syu
 
-pacman -S \
+pacman -Sy --noconfirm \
   git \
   vim \
   reflector \
@@ -20,11 +20,18 @@ git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 
 ## yay installs
-yay -Sy --noconfirm \
+yay -Sy --needed --noconfirm \
   visual-studio-code-bin \
   timeshift \
   kubectl \
-  slack-dekstop
+  slack-dekstop \
+  opensc \
+  ccid \
+  icaclient \
+  pcsc-tools
+
+## Enable on startup
+systemctl enable --now pcscd.service
 
 ## AWS CLI install
 cd $HOME
