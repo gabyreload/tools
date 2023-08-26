@@ -1,7 +1,7 @@
 ## Update System
 pacman -Syu
 
-pacman -Sy --noconfirm \
+pacman -Sy --needed --noconfirm \
   git \
   vim \
   reflector \
