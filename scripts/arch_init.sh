@@ -13,22 +13,26 @@ cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak && \
 reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 pacman -Sy
+mkdir install && cd install
 
 ## yay installation
-cd $HOME
+cd $HOME/install
 git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 
 ## yay installs
 yay -Sy --needed --noconfirm \
   visual-studio-code-bin \
-  timeshift \
+  terraform \
+  terragrunt \
   kubectl \
-  slack-dekstop \
+  zoom \
+  slack-desktop \
   opensc \
   ccid \
   icaclient \
   pcsc-tools \
+  timeshift \
   gnome-icon-theme \
   gnome-icon-theme-symbolic
 
@@ -36,15 +40,15 @@ yay -Sy --needed --noconfirm \
 systemctl enable --now pcscd.service
 
 ## AWS CLI install
-cd $HOME
+cd $HOME/install
 wget https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
 unzip awscli-exe-linux-x86_64.zip
 cd aws
 ./install -i $HOME/.local/aws-cli -b $HOME/.local/bin --update
-PATH=$PATH:/home/hgbarreto/.local/bin
+PATH=$PATH:$HOME/.local/bin
 
 ## Install Vitals Extension
-cd $HOME
+cd $HOME/install
 git clone https://aur.archlinux.org/gnome-shell-extension-vitals-git.git/
 cd gnome-shell-extension-vitals-git && makepkg -si
 
