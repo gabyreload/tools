@@ -34,7 +34,8 @@ yay -Sy --needed --noconfirm \
   pcsc-tools \
   timeshift \
   gnome-icon-theme \
-  gnome-icon-theme-symbolic
+  gnome-icon-theme-symbolic \
+  gnome-browser-connector
 
 ## Enable on startup
 systemctl enable --now pcscd.service
