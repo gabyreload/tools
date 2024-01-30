@@ -25,7 +25,7 @@ jobs:
       run: docker build . --file jenkins/Dockerfile --tag jenkins-sbom:1.0
 
     - name: Generate SBOM
-      run: docker sbom --output sbom.txt jenkins-sbom:1.0
+      run: docker sbom --output /github/workspace/sbom.txt jenkins-sbom:1.0
 
     # - uses: actions/upload-artifact@v4
     #   with:
