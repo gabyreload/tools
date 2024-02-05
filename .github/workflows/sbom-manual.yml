@@ -15,7 +15,7 @@ on:
         required: false
         default: ""
 jobs:
-  SBOM Generation:
+  sbom-generation:
     uses: ./.github/workflows/docker-image.yml
     with:
       image_name: ${{ inputs.image_name == 'whoops' }}
