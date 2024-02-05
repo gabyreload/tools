@@ -10,15 +10,15 @@ on:
         type: string
         required: true
         default: whoops
-      extra_vars:
+      ecr_repo_name:
         type: string
-        required: false
-        default: ""
+        required: true
+        default: whoops
 jobs:
   sbom-generation:
     uses: ./.github/workflows/docker-image.yml
     with:
       image_name: ${{ inputs.image_name }}
       image_tag: ${{ inputs.image_tag }}
-      extra_vars:  ${{ inputs.extra_vars }}
+      ecr_repo_name:  ${{ inputs.ecr_repo_name }}
     secrets: inherit
