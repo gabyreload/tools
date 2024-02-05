@@ -1,0 +1,24 @@
+name: SBOM (Manual)
+on:
+  workflow_dispatch:
+    inputs:
+      image_name:
+        type: string
+        required: true
+        default: whoops
+      image_tag:
+        type: string
+        required: true
+        default: whoops
+      extra_vars:
+        type: string
+        required: false
+        default: ""
+jobs:
+  SBOM Generation:
+    uses: ./.github/workflows/docker-image.yml
+    with:
+      image_name: ${{ inputs.image_name == 'whoops' }}
+      image_tag: ${{ inputs.image_tag == 'whoops' }}
+      extra_vars:  ${{ inputs.extra_vars }}
+    secrets: inherit
