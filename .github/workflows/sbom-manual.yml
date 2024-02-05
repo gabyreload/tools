@@ -18,7 +18,7 @@ jobs:
   sbom-generation:
     uses: ./.github/workflows/docker-image.yml
     with:
-      image_name: ${{ inputs.image_name == 'whoops' }}
-      image_tag: ${{ inputs.image_tag == 'whoops' }}
+      image_name: ${{ inputs.image_name }}
+      image_tag: ${{ inputs.image_tag }}
       extra_vars:  ${{ inputs.extra_vars }}
     secrets: inherit
