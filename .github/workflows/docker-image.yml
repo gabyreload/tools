@@ -24,12 +24,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
 
     - name: Download SBOM PLugin
       run: curl -sSfl https://raw.githubusercontent.com/docker/sbom-cli-plugin/main/install.sh -o install-docker-sbom.sh && chmod +x install-docker-sbom.sh
 
     - name: Run SBOM Installer
       run: ./install-docker-sbom.sh && docker sbom --version && mkdir sbom
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
 
     - name: Pull Image
       run: docker pull ${{ inputs.image_name }}:${{ inputs.image_tag }}
@@ -38,7 +48,7 @@ jobs:
     #   run: docker build . --file jenkins/Dockerfile --tag jenkins-sbom:1.0
 
     - name: Generate SBOM
-      run: docker sbom --format spdx-json --output "sbom/${{ inputs.image_name }}-${{ inputs.image_tag }}.json" ${{ inputs.image_name }}:${{ inputs.image_tag }}| jq -c "." > "sbom/${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
+      run: docker sbom --format spdx-json --output "sbom/${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 580794140654.dkr.ecr.us-east-1.amazonaws.com/${{ inputs.image_name }}:${{ inputs.image_tag }}| jq -c "." > "sbom/${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
 
     # - uses: actions/upload-artifact@v4
     #   with:
