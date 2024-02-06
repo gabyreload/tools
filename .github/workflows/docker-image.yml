@@ -31,38 +31,54 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Download SBOM Plugin
-      run: >-
-        curl -sSfl https://raw.githubusercontent.com/docker/sbom-cli-plugin/main/install.sh 
-        -o install-docker-sbom.sh 
-        && chmod +x install-docker-sbom.sh
+    # - name: Download SBOM Plugin
+    #   run: >-
+    #     curl -sSfl https://raw.githubusercontent.com/docker/sbom-cli-plugin/main/install.sh 
+    #     -o install-docker-sbom.sh 
+    #     && chmod +x install-docker-sbom.sh
 
-    - name: Run SBOM Plugin Installer
-      run: >- 
-        ./install-docker-sbom.sh 
-        && docker sbom --version
+    # - name: Run SBOM Plugin Installer
+    #   run: >- 
+    #     ./install-docker-sbom.sh 
+    #     && docker sbom --version
 
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-
-    - name: Pull Image
+      
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      continue-on-error: true
+      with:
+        image-ref: '${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}'
+        format: 'table'
+        exit-code: '1'
+        output: "output.csv"
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+        
+    - name: output check
       run: >- 
-        docker pull 
-        ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}
+        cat output.csv
+
+    # - name: Pull Image
+    #   run: >- 
+    #     docker pull 
+    #     ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}
     
-    - name: Generate SBOM (JSON)
-      run: >-
-        docker sbom 
-        --format spdx-json 
-        --output "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
-        ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }} 
+    # - name: Generate SBOM (JSON)
+    #   run: >-
+    #     docker sbom 
+    #     --format spdx-json 
+    #     --output "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
+    #     ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }} 
 
-    - name: Copy SBOM to Bucket
-      run: >- 
-        aws s3 cp 
-        "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
-        s3://barretotechbucket/sbom/ 
+    # - name: Copy SBOM to Bucket
+    #   run: >- 
+    #     aws s3 cp 
+    #     "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
+    #     s3://barretotechbucket/sbom/ 
 
     # - uses: jakejarvis/s3-sync-action@master
     #   with:
