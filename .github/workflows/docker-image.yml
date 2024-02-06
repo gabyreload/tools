@@ -48,7 +48,7 @@ jobs:
     #   run: docker build . --file jenkins/Dockerfile --tag jenkins-sbom:1.0
 
     - name: Generate SBOM
-      run: docker sbom --format spdx-json --output "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}| jq -c "." > "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
+      run: docker sbom --format spdx-json --output "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}| jq -c "." > "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" && ls al
 
     # - uses: actions/upload-artifact@v4
     #   with:
@@ -56,7 +56,7 @@ jobs:
     #     path: sbom.txt
 
     - name: AWS CLI Command
-      run: aws s3 cp "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" s3://barretotechbucket/sbom/ --recursive
+      run: ls -al && aws s3 cp "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" s3://barretotechbucket/sbom/ --recursive
 
     # - uses: jakejarvis/s3-sync-action@master
     #   with:
