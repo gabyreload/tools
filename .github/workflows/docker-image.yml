@@ -51,8 +51,7 @@ jobs:
       continue-on-error: true
       with:
         image-ref: '${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}'
-        format: 'table'
-        exit-code: '1'
+        format: 'json'
         output: "output.csv"
         list-all-pkgs: true
         
