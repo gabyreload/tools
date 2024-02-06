@@ -31,31 +31,38 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Download SBOM PLugin
-      run: curl -sSfl https://raw.githubusercontent.com/docker/sbom-cli-plugin/main/install.sh -o install-docker-sbom.sh && chmod +x install-docker-sbom.sh
+    - name: Download SBOM Plugin
+      run: >-
+        curl -sSfl https://raw.githubusercontent.com/docker/sbom-cli-plugin/main/install.sh 
+        -o install-docker-sbom.sh 
+        && chmod +x install-docker-sbom.sh
 
-    - name: Run SBOM Installer
-      run: ./install-docker-sbom.sh && docker sbom --version && mkdir sbom
+    - name: Run SBOM Plugin Installer
+      run: >- 
+        ./install-docker-sbom.sh 
+        && docker sbom --version
 
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Pull Image
-      run: docker pull ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}
+      run: >- 
+        docker pull 
+        ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}
     
-    # - name: Build the Docker image
-    #   run: docker build . --file jenkins/Dockerfile --tag jenkins-sbom:1.0
+    - name: Generate SBOM (JSON)
+      run: >-
+        docker sbom 
+        --format spdx-json 
+        --output "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
+        ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }} 
 
-    - name: Generate SBOM
-      run: docker sbom --format spdx-json --output "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }} && cat "${{ inputs.image_name }}-${{ inputs.image_tag }}.json"
-    # - uses: actions/upload-artifact@v4
-    #   with:
-    #     name: sbom.txt
-    #     path: sbom.txt
-
-    - name: AWS CLI Command
-      run: aws s3 cp "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" s3://barretotechbucket/sbom/ 
+    - name: Copy SBOM to Bucket
+      run: >- 
+        aws s3 cp 
+        "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
+        s3://barretotechbucket/sbom/ 
 
     # - uses: jakejarvis/s3-sync-action@master
     #   with:
