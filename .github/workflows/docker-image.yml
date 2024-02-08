@@ -51,11 +51,11 @@ jobs:
       continue-on-error: true
       with:
         image-ref: '${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}'
+        format: cyclonedx
         output: "output.json"
+        list-all-pkgs: true
       env:
-        TRIVY_FORMAT: cyclonedx
         TRIVY_DEBUG: true
-        TRIVY_LIST_ALL_PKGS: true
 
     # - name: Pull Image
     #   run: >- 
