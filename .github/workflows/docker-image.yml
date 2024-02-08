@@ -68,9 +68,12 @@ jobs:
     #     --output "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
     #     ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }} 
 
-    - name: Copy SBOM to Bucket
+
+    - name: Convert to one line JSON
       run: >- 
         cat "output.json" | jq -c '.' > "new_output.json"
+    - name: Copy SBOM to Bucket
+      run: >- 
         aws s3 cp 
         output.json
         s3://barretotechbucket/sbom/ 
