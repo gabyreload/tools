@@ -71,7 +71,8 @@ jobs:
 
     - name: Convert to one line JSON
       run: >- 
-        cat "output.json" | jq -c '.' > "new_output.json"
+        tr -d '\n' output.json > new_output.json
+        # cat "output.json" | jq -c '.' > "new_output.json"
     - name: Copy SBOM to Bucket
       run: >- 
         aws s3 cp 
