@@ -69,13 +69,14 @@ jobs:
     #     ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }} 
 
 
-    - name: Convert to one line JSON
-      run: >- 
-        cat output.json | tr -d \\n > output-cdx.json
+    # - name: Convert to one line JSON
+    #   run: >- 
+    #     cat output.json | tr -d \\n > output-cdx.json
+        
     - name: Copy SBOM to Bucket
       run: >- 
         aws s3 cp 
-        output-cdx.json
+        output.json
         s3://barretotechbucket/sbom/ 
 
     # - uses: jakejarvis/s3-sync-action@master
