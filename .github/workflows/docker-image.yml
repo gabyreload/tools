@@ -71,11 +71,11 @@ jobs:
     #     --output "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
     #     ${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }} 
 
-    # - name: Copy SBOM to Bucket
-    #   run: >- 
-    #     aws s3 cp 
-    #     "${{ inputs.image_name }}-${{ inputs.image_tag }}.json" 
-    #     s3://barretotechbucket/sbom/ 
+    - name: Copy SBOM to Bucket
+      run: >- 
+        aws s3 cp 
+        output.csv
+        s3://barretotechbucket/sbom/ 
 
     # - uses: jakejarvis/s3-sync-action@master
     #   with:
