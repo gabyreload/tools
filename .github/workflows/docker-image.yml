@@ -54,6 +54,7 @@ jobs:
         output: "output.json"
       env:
         TRIVY_FORMAT: cyclonedx
+        TRIVY_DEBUG: true
         TRIVY_LIST_ALL_PKGS: true
 
     # - name: Pull Image
