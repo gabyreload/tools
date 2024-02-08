@@ -51,9 +51,10 @@ jobs:
       continue-on-error: true
       with:
         image-ref: '${{ inputs.ecr_repo_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}'
-        format: 'json'
         output: "output.json"
         list-all-pkgs: true
+      env:
+        TRIVY_FORMAT: cyclonedx
 
     # - name: Pull Image
     #   run: >- 
