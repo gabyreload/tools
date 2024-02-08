@@ -72,7 +72,7 @@ jobs:
 
     - name: Convert to one line JSON
       run: >- 
-        cat output.json | tr -d \\n > output-cdx.json
+        cat output.json | tr -d \\n | tr -d " " > output-cdx.json
         
     - name: Copy SBOM to Bucket
       run: >- 
