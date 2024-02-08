@@ -54,10 +54,6 @@ jobs:
         format: 'json'
         output: "output.json"
         list-all-pkgs: true
-        
-    - name: output check
-      run: >- 
-        cat output.csv
 
     # - name: Pull Image
     #   run: >- 
