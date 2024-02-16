@@ -7,10 +7,8 @@ pacman -Syu
 pacman -Sy --needed --noconfirm \
   git \
   vim \
-  reflector \
-  intel-ucode \
-  linux-lts linux-lts-headers 
-
+  reflector
+  
 echo "=============================="
 echo "Refelector Setup"
 echo "=============================="
@@ -70,7 +68,6 @@ echo "=============================="
 echo "Install Vitals Extension"
 echo "=============================="
 
-
 cd $HOME/install
 git clone https://aur.archlinux.org/gnome-shell-extension-vitals-git.git/
 cd gnome-shell-extension-vitals-git && makepkg -si
@@ -79,7 +76,7 @@ echo "=============================="
 echo "Add AWS MFA Script"
 echo "=============================="
 
-
+mkdir ~/bin
 cat > ~/bin/aws-mfa-connect.sh <<'endmsg'
 #!/bin/bash
 #
@@ -109,7 +106,7 @@ unset code
 unset get_session_token
 endmsg
 
-
+chomd +x ~/bin/aws-mfa-connect.sh
 alias aws-mfa-connect="source ~/bin/aws-mfa-connect.sh"
 
 echo "=============================="
