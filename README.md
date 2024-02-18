@@ -1,4 +1,4 @@
 ```mermaid
-blockbeta
+"block-beta"
 a
 ```
