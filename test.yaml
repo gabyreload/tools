@@ -41,7 +41,7 @@
        type: cluster
        of:
          - id: leader
-           name: R/W Leader
+           name: ChickenWings
            type: aws.database.RDS
            relates:
              - to: databases.followers
