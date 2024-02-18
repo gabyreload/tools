@@ -1,5 +1,6 @@
 name: Diagram as Code
-on:
+on: 
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
