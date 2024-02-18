@@ -2,15 +2,15 @@
    name: Web Services Architecture on AWS
    open: true
    resources:
-     - id: dns
-       name: DNS
-       type: aws.network.Route53
+     - id: ecr
+       name: ECR
+       type: aws.compute.EC2ContainerRegistry
        relates:
-         - to: elb
+         - to: configdc
            direction: outgoing
-     - id: elb
-       name: ELB
-       type: aws.network.ELB
+     - id: configdc
+       name: Config Data Container
+       type: aws.general.General
        relates:
          - to: web-services.graphql-api
            direction: outgoing
