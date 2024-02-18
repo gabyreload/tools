@@ -1,4 +1,6 @@
-# tools
-
-A fantastic adventure trying get different apps to play nice within docker containers.
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 
