@@ -26,57 +26,35 @@ jobs:
                 relates:
                   - to: configdc
                     direction: outgoing
+                  - to: vacerts
+                    direction: outgoing
               - id: configdc
                 name: Config Data Container
                 type: aws.general.General
                 relates:
-                  - to: web-services.graphql-api
+                  - to: revproxy-image.revproxy-image-components
                     direction: outgoing
-              - id: web-services
-                name: Web Services
+              - id: vacerts
+                name: VA Certs Data Container
+                type: aws.general.General
+                relates:
+                  - to: revproxy-image.revproxy-image-components
+                    direction: outgoing
+              - id: revproxy-image
+                name: RevProxy Image
                 type: cluster
                 of:
-                  - id: graphql-api
-                    name: GraphQL API
+                  - id: revproxy-image-components
+                    name: RevProxy Img Components
                     type: group
                     of:
-                      - id: first-api
-                        name: GraphQL API №1
+                      - id: config-mount
+                        name: Config Mount
                         type: aws.compute.ECS
-                      - id: second-api
-                        name: GraphQL API №2
+                      - id: vacert-mount
+                        name: VA Cert Mount
                         type: aws.compute.ECS
-                      - id: third-api
-                        name: GraphQL API №3
-                        type: aws.compute.ECS
-                    relates:
-                      - to: databases.leader
-                        direction: outgoing
-                      - to: memcached
-                        direction: outgoing
-              - id: databases
-                name: Databases
-                type: cluster
-                of:
-                  - id: leader
-                    name: ChickenWings
-                    type: aws.database.RDS
-                    relates:
-                      - to: databases.followers
-                        direction: undirected
-                  - id: followers
-                    name: R/O Followers
-                    type: group
-                    of:
-                      - id: first-follower
-                        name: R/O Follower №1
-                        type: aws.database.RDS
-                      - id: second-follower
-                        name: R/O Follower №2
-                        type: aws.database.RDS
-              - id: memcached
-                name: Memcached
-                type: aws.database.ElastiCache
+                   
          EOF
 
      - name: Run DaC code
