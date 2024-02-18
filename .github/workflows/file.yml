@@ -81,5 +81,5 @@ jobs:
 
      - name: Diagram-As-Code Install
        run: >-
-         diagrams-as-code test.yaml
+         diagrams-as-code test.yaml && ls -al
 
