@@ -1,1 +1,1 @@
-![alt text](https://github.com/gabyreload/tools/blob/master/diagrams_image.png?raw=true)
+![alt text](https://github.com/gabyreload/tools/blob/publish/diagrams_image.png?raw=true)
