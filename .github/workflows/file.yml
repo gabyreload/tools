@@ -13,7 +13,7 @@ jobs:
        run: >-
          pip3 install diagrams-as-code
 
-     - name: Diagram-As-Code Install
+     - name: Create test.yaml
        run: >-
          cat <<EOF > test.yaml
           diagram:
@@ -79,7 +79,7 @@ jobs:
                 type: aws.database.ElastiCache
          EOF
 
-     - name: Diagram-As-Code Install
+     - name: Run DaC code
        run: >-
          diagrams-as-code test.yaml && ls -al
          
