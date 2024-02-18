@@ -1,5 +1,6 @@
  diagram:
    name: Web Services Architecture on AWS
+   direction: bottom-to-top
    open: true
    resources:
      - id: ecr
@@ -14,13 +15,13 @@
        name: Config Data Container
        type: aws.general.General
        relates:
-         - to: revproxy-image.revproxy-image-components
+         - to: revproxy-image.revproxy-image-components.config-mount
            direction: outgoing
      - id: vacerts
        name: VA Certs Data Container
        type: aws.general.General
        relates:
-         - to: revproxy-image.revproxy-image-components
+         - to: revproxy-image.revproxy-image-components.vacert-mount
            direction: outgoing
      - id: revproxy-image
        name: RevProxy Image
