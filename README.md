@@ -1,5 +1,4 @@
-```mermaid
-block-beta
+```block-beta
   columns 3
   Frontend blockArrowId6<[" "]>(right) Backend
   space:2 down<[" "]>(down)
